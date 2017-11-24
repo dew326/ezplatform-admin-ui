@@ -30,4 +30,11 @@
 {% block right_sidebar %}
     {% set content_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_edit.sidebar_right', [], {'content': content, 'content_type': contentType}) %}
     {{ knp_menu_render(content_edit_sidebar_right, {'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'}) }}
+
+    <button class="ez-btn--extra-actions ez-btn--edit btn btn-secondary btn-block" data-actions="send-for-review">
+        <svg class="ez-icon ez-icon-send-for-review">
+            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#review"></use>
+        </svg>
+        Send for review
+    </button>
 {% endblock %}

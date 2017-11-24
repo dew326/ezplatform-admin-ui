@@ -35,6 +35,69 @@
         </div>
         <div class="col-sm-1 pt-4 bg-secondary ez-context-menu">
             {% block right_sidebar %}{% endblock %}
+            <div class="ez-extra-actions-container">
+                <div class="ez-extra-actions ez-extra-actions--send-for-review bg-secondary ez-extra-actions--hidden fw-send-for-review" data-actions="send-for-review">
+                    <div class="ez-extra-actions__header">Add a Reviewer</div>
+                    <div class="ez-extra-actions__content">
+                        <div class="fw-send-for-review__user-wrapper">
+                            <input type="text" class="form-control fw-send-for-review__user-input" placeholder="Type to search">
+                            <ul class="fw-send-for-review__user-list fw-send-for-review__user-list--hidden">
+                                <li class="fw-send-for-review__user-item">
+                                    Admin list
+                                </li>
+                                <li class="fw-send-for-review__user-item">
+                                    Admin list
+                                </li>
+                                <li class="fw-send-for-review__user-item">
+                                    Admin list
+                                </li>
+                                <li class="fw-send-for-review__user-item">
+                                    Admin list
+                                </li>
+                                <li class="fw-send-for-review__user-item">
+                                    Admin list
+                                </li>
+                                <li class="fw-send-for-review__user-item">
+                                    Admin list
+                                </li>
+                                <li class="fw-send-for-review__user-item">
+                                    Admin list
+                                </li>
+                                <li class="fw-send-for-review__user-item">
+                                    Admin list
+                                </li>
+                                <li class="fw-send-for-review__user-item">
+                                    Admin list
+                                </li>
+                                <li class="fw-send-for-review__user-item">
+                                    Admin list
+                                </li>
+                                <li class="fw-send-for-review__user-item">
+                                    Admin list
+                                </li>
+                                <li class="fw-send-for-review__user-item">
+                                    Admin list
+                                </li>
+                            </ul>
+                            <div class="fw-send-for-review__user" hidden>
+                                <span class="fw-send-for-review__selected-user">
+                                    Admin
+                                    <svg class="ez-icon ez-icon--remove-reviewer">
+                                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#circle-close"></use>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="fw-send-for-review__message-wrapper" hidden>
+                            <span>Message (Optional):</span>
+                            <textarea cols="30" rows="5" class="form-control" placeholder="Type your message..."></textarea>
+                        </div>
+                        <div class="fw-send-for-review__actions" hidden>
+                            <button class="btn btn-primary ez-btn ez-btn--wide fw-btn--send-for-review">Send for review</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
@@ -47,6 +110,8 @@
         '@EzPlatformAdminUiBundle/Resources/public/js/scripts/fieldType/base/base-file-field.js'
         '@EzPlatformAdminUiBundle/Resources/public/js/scripts/fieldType/base/base-preview-field.js'
         '@EzPlatformAdminUiBundle/Resources/public/js/scripts/fieldType/*'
+        'bundles/ezplatformadminui/js/scripts/sidebar/extra.actions.js'
+        'bundles/ezplatformadminui/js/scripts/sidebar/send.for.review.js'
     %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
