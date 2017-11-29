@@ -1,0 +1,18 @@
+.dbp-publish-later {
+    .ez-extra-actions__content {
+        padding: 1rem;
+    }
+
+    &__pick {
+        margin-bottom: 1rem;
+    }
+
+    &__pick-label {
+        font-weight: bold;
+    }
+
+    &__actions {
+        display: flex;
+        justify-content: center;
+    }
+}
