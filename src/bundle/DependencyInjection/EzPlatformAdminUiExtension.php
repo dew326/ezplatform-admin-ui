@@ -44,6 +44,7 @@ class EzPlatformAdminUiExtension extends Extension implements PrependExtensionIn
     {
         $this->prependViews($container);
         $this->prependImageVariations($container);
+        $this->prependFieldTypesConfiguration($container);
     }
 
     /**
@@ -66,5 +67,16 @@ class EzPlatformAdminUiExtension extends Extension implements PrependExtensionIn
         $config = Yaml::parse(file_get_contents($imageConfigFile));
         $container->prependExtensionConfig('ezpublish', $config);
         $container->addResource(new FileResource($imageConfigFile));
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     */
+    private function prependFieldTypesConfiguration($container)
+    {
+        $customTagsConfigFile = __DIR__ . '/../Resources/config/field_types/ezrichtext.yml';
+        $config = Yaml::parse(file_get_contents($customTagsConfigFile));
+        $container->prependExtensionConfig('ezpublish', $config);
+        $container->addResource(new FileResource($customTagsConfigFile));
     }
 }

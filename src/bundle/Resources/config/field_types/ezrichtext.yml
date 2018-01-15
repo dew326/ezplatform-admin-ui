@@ -1,0 +1,60 @@
+# Note: This configuration is prepended to ezpublish Node
+# Enable Custom Tags for SiteAccess scope
+system:
+    default:
+        fieldtypes:
+            ezrichtext:
+                custom_tags: [ezyoutube, eztwitter]
+
+ezrichtext:
+    # Define Custom Tags
+    custom_tags:
+        ezyoutube:
+            template: '@ezdesign/ezrichtext/custom_tag/eztwitter.html.twig'
+            icon: '@ezdesign/ezrichtext/custom_tag/eztwitter.svg'
+            attributes:
+                title:
+                    type: 'string'
+                    required: true
+                    default_value: ''
+                inline:
+                    type: 'boolean'
+                    required: false
+                    default_value: true
+                limit:
+                    type: 'number'
+                    required: false
+                    default_value: 5
+                cssClass:
+                    type: 'choice'
+                    required: true
+                    default_value: ''
+                    choices:
+                        - 'super-class'
+                        - 'extra-class'
+                        - 'super-extra-class'
+
+        eztwitter:
+            template: '@ezdesign/ezrichtext/custom_tag/eztwitter.html.twig'
+            icon: '@ezdesign/ezrichtext/custom_tag/eztwitter.svg'
+            attributes:
+                title:
+                    type: 'string'
+                    required: true
+                    default_value: ''
+                inline:
+                    type: 'boolean'
+                    required: false
+                    default_value: true
+                limit:
+                    type: 'number'
+                    required: false
+                    default_value: 5
+                cssClass:
+                    type: 'choice'
+                    required: true
+                    default_value: ''
+                    choices:
+                        - 'super-class'
+                        - 'extra-class'
+                        - 'super-extra-class'
