@@ -28,6 +28,102 @@
                 },
             };
 
+            window.eZ.adminUiConfig.customTags = {
+                ezyoutube: {
+                    attributes: {
+                        title: {
+                            type: 'string',
+                            required: true,
+                            defaultValue: '',
+                            label: 'Title'
+                        },
+                        inline: {
+                            type: 'boolean',
+                            required: false,
+                            defaultValue: true,
+                            label: 'Inline'
+                        },
+                        limit: {
+                            type: 'number',
+                            required: false,
+                            defaultValue: 5,
+                            label: 'Limit'
+                        },
+                        cssClass: {
+                            type: 'choice',
+                            required: true,
+                            defaultValue: 'super-class',
+                            label: 'CSS class',
+                            choices: [
+                                'super-class',
+                                'extra-class',
+                                'super-extra-class'
+                            ]
+                        }
+                    }
+                },
+                eztwitter: {
+                    attributes: {
+                        title: {
+                            type: 'string',
+                            required: true,
+                            defaultValue: '',
+                            label: 'Title'
+                        },
+                        inline: {
+                            type: 'boolean',
+                            required: false,
+                            defaultValue: true,
+                            label: 'Inline'
+                        },
+                        limit: {
+                            type: 'number',
+                            required: false,
+                            defaultValue: 5,
+                            label: 'Limit'
+                        },
+                        cssClass: {
+                            type: 'choice',
+                            required: true,
+                            defaultValue: 'super-class',
+                            label: 'CSS class',
+                            choices: [
+                                'super-class',
+                                'extra-class',
+                                'super-extra-class'
+                            ]
+                        }
+                    }
+                },
+            };
+
+            window.eZ.adminUiConfig.alloyEditor = {
+                ezyoutube: {
+                    label: 'Video',
+                    icon: '/bundles/ezplatformadminui/img/ez-icons.svg#tag',
+                    toolbarButtons: [
+                        'ezmoveup',
+                        'ezmovedown',
+                        'ezembedleft',
+                        'ezembedcenter',
+                        'ezembedright',
+                        'ezblockremove',
+                    ],
+                },
+                eztwitter: {
+                    label: 'Twitter',
+                    icon: '/bundles/ezplatformadminui/img/ez-icons.svg#tag',
+                    toolbarButtons: [
+                        'ezmoveup',
+                        'ezmovedown',
+                        'ezembedleft',
+                        'ezembedcenter',
+                        'ezembedright',
+                        'ezblockremove',
+                    ],
+                },
+            };
+
             window.CKEDITOR_BASEPATH = window.ALLOYEDITOR_BASEPATH = "/bundles/ezplatformadminuiassets/vendors/alloyeditor/dist/alloy-editor/";
         </script>
         <script src="/bundles/fosjsrouting/js/router.js"></script>

@@ -32,6 +32,44 @@
         }
     }
 
+    const customTags = Object.keys(global.eZ.adminUiConfig.alloyEditor);
+
+    customTags.forEach(customTag => {
+        const tagConfig = global.eZ.adminUiConfig.customTags[customTag];
+        const alloyEditorConfig = global.eZ.adminUiConfig.alloyEditor[customTag];
+        const className = `ezBtn${customTag.charAt(0).toUpperCase() + customTag.slice(1)}`;
+
+        class customTagClass extends global.eZ.ezAlloyEditor.ezBtnCustomTag {
+            constructor() {
+                super();
+
+                this.name = alloyEditorConfig.label;
+                this.icon = alloyEditorConfig.icon;
+                this.customTagName = customTag;
+                this.attributes = tagConfig.attributes;
+
+                const values = {};
+
+                Object.keys(tagConfig.attributes).forEach(attr => {
+                    values[attr] = {
+                        value: tagConfig.attributes[attr].defaultValue
+                    };
+                });
+
+                this.state = {
+                    values: values
+                };
+            }
+
+            static get key() {
+                return customTag;
+            }
+        }
+
+        global.AlloyEditor.Buttons[customTagClass.key] = global.AlloyEditor[className] = customTagClass;
+    });
+
+
     [...doc.querySelectorAll(`${SELECTOR_FIELD} ${SELECTOR_INPUT}`)].forEach(container => {
         const alloyEditor = global.AlloyEditor.editable(container.getAttribute('id'), {
             toolbars: {
@@ -44,6 +82,7 @@
                         'ezimage',
                         'ezembed',
                         'eztable',
+                        ...customTags,
                     ],
                     tabIndex: 2,
                 },
@@ -66,6 +105,7 @@
                 'ezremoveblock',
                 'ezembed',
                 'ezfocusblock',
+                'ezcustomtag',
             ].join(','),
         });
         const getHTMLDocumentFragment = function (data) {
@@ -170,6 +210,7 @@
             doc.appendChild(root);
 
             [...doc.querySelectorAll('[data-ezelement="ezembed"]')].forEach(emptyEmbed);
+            [...doc.querySelectorAll('[data-ezelement="ezcustomtag"]')].forEach(emptyEmbed);
 
             event.target.closest('.ez-data-source').querySelector('textarea').value = xhtmlify(root.innerHTML).replace(xhtmlNamespace, ezNamespace);
         });
