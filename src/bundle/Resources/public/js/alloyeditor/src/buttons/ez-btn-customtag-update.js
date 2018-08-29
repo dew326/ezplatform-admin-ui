@@ -8,7 +8,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
         super(props);
 
         this.state = {
-            values: props.values
+            values: props.values,
         };
     }
 
@@ -32,7 +32,31 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
                     value={this.state.values[attrName].value}
                     onChange={this.updateValues.bind(this)}
                     data-attr-name={attrName}
-                ></input>
+                />
+            </div>
+        );
+    }
+
+    /**
+     * Renders the textarea.
+     *
+     * @method renderTextarea
+     * @param {Object} config
+     * @param {String} attrName
+     * @return {Object} The rendered textarea.
+     */
+    renderTextarea(config, attrName) {
+        return (
+            <div className="attribute__wrapper">
+                <label className="attribute__label form-control-label">{config.label}</label>
+                <textarea
+                    defaultValue={config.defaultValue}
+                    required={config.required}
+                    className="attribute__input form-control"
+                    value={this.state.values[attrName].value}
+                    onChange={this.updateValues.bind(this)}
+                    data-attr-name={attrName}
+                />
             </div>
         );
     }
@@ -57,7 +81,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
                     checked={this.state.values[attrName].value}
                     onChange={this.updateValues.bind(this)}
                     data-attr-name={attrName}
-                ></input>
+                />
             </div>
         );
     }
@@ -82,7 +106,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
                     value={this.state.values[attrName].value}
                     onChange={this.updateValues.bind(this)}
                     data-attr-name={attrName}
-                ></input>
+                />
             </div>
         );
     }
@@ -103,8 +127,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
                     className="attribute__input form-control"
                     value={this.state.values[attrName].value}
                     onChange={this.updateValues.bind(this)}
-                    data-attr-name={attrName}
-                >
+                    data-attr-name={attrName}>
                     {config.choices.map(this.renderChoice.bind(this))}
                 </select>
             </div>
@@ -119,9 +142,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
      * @return {Object} The rendered option.
      */
     renderChoice(choice) {
-        return (
-            <option value={choice}>{choice}</option>
-        );
+        return <option value={choice}>{choice}</option>;
     }
 
     /**
@@ -136,11 +157,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
         const renderMethods = this.getAttributeRenderMethods();
         const methodName = renderMethods[attributeConfig.type];
 
-        return (
-            <div className="ez-ae-custom-tag__attributes">
-                {this[methodName](attributeConfig, attribute)}
-            </div>
-        );
+        return <div className="ez-ae-custom-tag__attributes">{this[methodName](attributeConfig, attribute)}</div>;
     }
 
     /**
@@ -160,8 +177,9 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
                 <button
                     className="ez-btn-ae btn btn-secondary ez-btn-ae--custom-tag float-right"
                     onClick={this.saveCustomTag.bind(this)}
-                    disabled={!isValid}
-                >{saveLabel}</button>
+                    disabled={!isValid}>
+                    {saveLabel}
+                </button>
             </div>
         );
     }
@@ -173,7 +191,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
      * @return {Boolean} are values valid
      */
     isValid() {
-        return Object.keys(this.attributes).every(attr => {
+        return Object.keys(this.attributes).every((attr) => {
             return this.attributes[attr].required ? !!this.state.values[attr].value : true;
         });
     }
@@ -196,7 +214,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
         widget.setWidgetContent(this.createContent());
         widget.clearConfig();
 
-        Object.keys(this.attributes).forEach(key => {
+        Object.keys(this.attributes).forEach((key) => {
             widget.setConfig(key, configValues[key].value);
         });
     }
@@ -208,7 +226,10 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
      * @return {String} the ezcontent
      */
     createContent() {
-        return Object.keys(this.attributes).reduce((total, attr) => `${total}<p>${this.attributes[attr].label}: ${this.state.values[attr].value}</p>`,'');
+        return Object.keys(this.attributes).reduce(
+            (total, attr) => `${total}<p>${this.attributes[attr].label}: ${this.state.values[attr].value}</p>`,
+            ''
+        );
     }
 
     /**
@@ -224,7 +245,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
         values[event.target.dataset.attrName].value = value;
 
         this.setState({
-            values: values
+            values: values,
         });
     }
 
@@ -239,8 +260,9 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
             string: 'renderString',
             boolean: 'renderCheckbox',
             number: 'renderNumber',
-            choice: 'renderSelect'
-        }
+            choice: 'renderSelect',
+            textarea: 'renderTextarea',
+        };
     }
 }
 
