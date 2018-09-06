@@ -38,14 +38,20 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
     }
 
     /**
-     * Renders the textarea.
+     * Renders the codeArea.
      *
-     * @method renderTextarea
+     * @method renderCodeArea
      * @param {Object} config
      * @param {String} attrName
-     * @return {Object} The rendered textarea.
+     * @return {Object} The rendered codeArea.
      */
-    renderTextarea(config, attrName) {
+    renderCodeArea(config, attrName) {
+        let value = this.state.values[attrName].value;
+
+        if (value) {
+            value = value.replace('<![CDATA[', '').replace(']]>', '');
+        }
+
         return (
             <div className="attribute__wrapper">
                 <label className="attribute__label form-control-label">{config.label}</label>
@@ -53,7 +59,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
                     defaultValue={config.defaultValue}
                     required={config.required}
                     className="attribute__input form-control"
-                    value={this.state.values[attrName].value}
+                    value={value}
                     onChange={this.updateValues.bind(this)}
                     data-attr-name={attrName}
                 />
@@ -215,7 +221,13 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
         widget.clearConfig();
 
         Object.keys(this.attributes).forEach((key) => {
-            widget.setConfig(key, configValues[key].value);
+            let value = configValues[key].value;
+
+            if (this.attributes[key].type === 'codearea' && value && !value.includes('<![CDATA[')) {
+                value = `<![CDATA[${value}]]>`;
+            }
+
+            widget.setConfig(key, value);
         });
     }
 
@@ -261,7 +273,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
             boolean: 'renderCheckbox',
             number: 'renderNumber',
             choice: 'renderSelect',
-            textarea: 'renderTextarea',
+            codearea: 'renderCodeArea',
         };
     }
 }
