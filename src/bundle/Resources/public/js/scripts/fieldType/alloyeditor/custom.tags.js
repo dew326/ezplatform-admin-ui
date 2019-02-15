@@ -1,11 +1,23 @@
 (function(global, doc) {
-    Object.keys(global.eZ.adminUiConfig.richTextCustomTags).forEach((customTag) => {
-        const tagConfig = global.eZ.adminUiConfig.richTextCustomTags[customTag];
-        const componentClassName = `ezBtn${customTag.charAt(0).toUpperCase() + customTag.slice(1)}`;
+    // temp hardcoded inline:
+    global.eZ.adminUiConfig.richTextCustomTags.factbox.isInline = true;
+    global.eZ.adminUiConfig.richTextCustomTags.call_to_action.isInline = true;
+    // endtemp
+
+    Object.entries(global.eZ.adminUiConfig.richTextCustomTags).forEach(([customTag, tagConfig]) => {
+        const isInline = tagConfig.isInline;
+        const componentClassName = `ezBtn${isInline ? 'Inline' : ''}${customTag.charAt(0).toUpperCase() + customTag.slice(1)}`;
         const editComponentClassName = `${componentClassName}Edit`;
         const updateComponentClassName = `${componentClassName}Update`;
+        const buttonCustomTagBaseClass = isInline ? global.eZ.ezAlloyEditor.ezBtnInlineCustomTag : global.eZ.ezAlloyEditor.ezBtnCustomTag;
+        const buttonCustomTagEditBaseClass = isInline
+            ? global.eZ.ezAlloyEditor.ezBtnInlineCustomTagEdit
+            : global.eZ.ezAlloyEditor.ezBtnCustomTagEdit;
+        const buttonCustomTagUpdateBaseClass = isInline
+            ? global.eZ.ezAlloyEditor.ezBtnInlineCustomTagUpdate
+            : global.eZ.ezAlloyEditor.ezBtnCustomTagUpdate;
 
-        class ButtonCustomTag extends global.eZ.ezAlloyEditor.ezBtnCustomTag {
+        class ButtonCustomTag extends buttonCustomTagBaseClass {
             constructor(props) {
                 super(props);
 
@@ -24,11 +36,11 @@
             }
 
             static get key() {
-                return customTag;
+                return `${isInline ? 'inline' : ''}${customTag}`;
             }
         }
 
-        class ButtonCustomTagEdit extends global.eZ.ezAlloyEditor.ezBtnCustomTagEdit {
+        class ButtonCustomTagEdit extends buttonCustomTagEditBaseClass {
             constructor(props) {
                 super(props);
 
@@ -37,11 +49,11 @@
             }
 
             static get key() {
-                return `${customTag}edit`;
+                return `${isInline ? 'inline' : ''}${customTag}edit`;
             }
         }
 
-        class ButtonCustomTagUpdate extends global.eZ.ezAlloyEditor.ezBtnCustomTagUpdate {
+        class ButtonCustomTagUpdate extends buttonCustomTagUpdateBaseClass {
             constructor(props) {
                 super(props);
 
@@ -50,7 +62,7 @@
             }
 
             static get key() {
-                return `${customTag}update`;
+                return `${isInline ? 'inline' : ''}${customTag}update`;
             }
         }
 

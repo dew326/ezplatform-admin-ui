@@ -41,7 +41,7 @@
     }
 
     & > [data-ezelement='ezattributes'],
-    & > [data-ezelement='ezcontent'] {
+    &:not([data-ezelement='eztemplateinline']) > [data-ezelement='ezcontent'] {
         display: none;
         padding: calculateRem(8px);
     }

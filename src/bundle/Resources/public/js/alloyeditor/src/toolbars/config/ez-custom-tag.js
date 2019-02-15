@@ -4,15 +4,7 @@ export default class EzCustomTagConfig extends EzConfigBase {
     constructor(config) {
         super(config);
 
-        const defaultButtons = [
-            'ezmoveup',
-            'ezmovedown',
-            `${config.name}edit`,
-            'ezembedleft',
-            'ezembedcenter',
-            'ezembedright',
-            'ezblockremove',
-        ];
+        const defaultButtons = ['ezmoveup', 'ezmovedown', config.name, 'ezembedleft', 'ezembedcenter', 'ezembedright', 'ezblockremove'];
         const customButtons = config.alloyEditor.toolbarButtons;
         const buttons = customButtons && customButtons.length ? customButtons : defaultButtons;
 
@@ -36,7 +28,9 @@ export default class EzCustomTagConfig extends EzConfigBase {
      */
     test(payload) {
         const element = payload.data.selectionData.element;
-
+        console.log(payload);
+        console.log(this.name);
+        console.log(element);
         return !!(element && element.$.dataset.ezname === this.name);
     }
 }
