@@ -3,9 +3,11 @@ import EzBtnCustomTag from './ez-btn-customtag';
 
 export default class EzBtnInlineCustomTag extends EzBtnCustomTag {
     getUpdateBtnName() {
-        return `ezBtnInline${this.customTagName.charAt(0).toUpperCase() + this.customTagName.slice(1)}Update`;
+        return `ezBtn${this.customTagName.charAt(0).toUpperCase() + this.customTagName.slice(1)}Update`;
     }
 }
+
+eZ.addConfig('ezAlloyEditor.ezBtnInlineCustomTag', EzBtnInlineCustomTag);
 
 EzBtnInlineCustomTag.propTypes = {
     editor: PropTypes.object.isRequired,

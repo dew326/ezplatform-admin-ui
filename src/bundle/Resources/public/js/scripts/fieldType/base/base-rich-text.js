@@ -13,12 +13,22 @@
             this.customTags = Object.keys(global.eZ.adminUiConfig.richTextCustomTags).filter(
                 (key) => !global.eZ.adminUiConfig.richTextCustomTags[key].isInline
             );
-            this.inlineCustomTags = Object.keys(global.eZ.adminUiConfig.richTextCustomTags)
-                .filter((key) => global.eZ.adminUiConfig.richTextCustomTags[key].isInline)
-                .map((key) => `inline${key}`);
-            this.customTagsToolbars = Object.entries(global.eZ.adminUiConfig.richTextCustomTags).map(([customTag, alloyEditorConfig]) => {
+            this.inlineCustomTags = Object.keys(global.eZ.adminUiConfig.richTextCustomTags).filter(
+                (key) => global.eZ.adminUiConfig.richTextCustomTags[key].isInline
+            );
+            this.customTagsToolbars = this.customTags.map((customTag) => {
+                const alloyEditorConfig = global.eZ.adminUiConfig.richTextCustomTags[customTag];
+
                 return new global.eZ.ezAlloyEditor.ezCustomTagConfig({
-                    name: `${alloyEditorConfig.isInline ? 'inline' : ''}${customTag}`,
+                    name: customTag,
+                    alloyEditor: alloyEditorConfig,
+                });
+            });
+            this.inlineCustomTagsToolbars = this.inlineCustomTags.map((customTag) => {
+                const alloyEditorConfig = global.eZ.adminUiConfig.richTextCustomTags[customTag];
+
+                return new global.eZ.ezAlloyEditor.ezInlineCustomTagConfig({
+                    name: customTag,
                     alloyEditor: alloyEditorConfig,
                 });
             });
@@ -138,6 +148,12 @@
             headers.forEach((header) => header.remove());
         }
 
+        clearInlineCustomTag(inlineCustomTag) {
+            const icons = [...inlineCustomTag.querySelectorAll('.ez-custom-tag__icon-wrapper')];
+
+            icons.forEach((icon) => icon.remove());
+        }
+
         init(container) {
             const alloyEditor = global.AlloyEditor.editable(container.getAttribute('id'), {
                 toolbars: {
@@ -162,6 +178,7 @@
                                 customStyles: this.customStylesConfigurations,
                                 inlineCustomTags: this.inlineCustomTags,
                             }),
+                            ...this.inlineCustomTagsToolbars,
                             new window.eZ.ezAlloyEditor.ezParagraphConfig({ customStyles: this.customStylesConfigurations }),
                             new window.eZ.ezAlloyEditor.ezFormattedConfig({ customStyles: this.customStylesConfigurations }),
                             new window.eZ.ezAlloyEditor.ezCustomStyleConfig({ customStyles: this.customStylesConfigurations }),
@@ -206,6 +223,9 @@
                     ...doc.querySelectorAll('[data-ezelement="ezembedinline"]'),
                 ].forEach(this.emptyEmbed);
                 [...doc.querySelectorAll('[data-ezelement="eztemplate"]:not([data-eztype="style"])')].forEach(this.clearCustomTag);
+                [...doc.querySelectorAll('[data-ezelement="eztemplateinline"]:not([data-eztype="style"])')].forEach(
+                    this.clearInlineCustomTag
+                );
 
                 container.closest('.ez-data-source').querySelector('textarea').value = this.xhtmlify(root.innerHTML).replace(
                     this.xhtmlNamespace,

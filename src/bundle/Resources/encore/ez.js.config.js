@@ -61,6 +61,9 @@ const alloyEditor = [
     path.resolve(__dirname, '../public/js/alloyeditor/src/buttons/ez-btn-customtag.js'),
     path.resolve(__dirname, '../public/js/alloyeditor/src/buttons/ez-btn-customtag-edit.js'),
     path.resolve(__dirname, '../public/js/alloyeditor/src/buttons/ez-btn-customtag-update.js'),
+    path.resolve(__dirname, '../public/js/alloyeditor/src/buttons/ez-btn-inlinecustomtag.js'),
+    path.resolve(__dirname, '../public/js/alloyeditor/src/buttons/ez-btn-inlinecustomtag-edit.js'),
+    path.resolve(__dirname, '../public/js/alloyeditor/src/buttons/ez-btn-inlinecustomtag-update.js'),
     path.resolve(__dirname, '../public/js/alloyeditor/src/toolbars/ez-add.js'),
     path.resolve(__dirname, '../public/js/alloyeditor/src/plugins/ez-add-content.js'),
     path.resolve(__dirname, '../public/js/alloyeditor/src/plugins/ez-move-element.js'),
@@ -81,6 +84,7 @@ const alloyEditor = [
     path.resolve(__dirname, '../public/js/alloyeditor/src/toolbars/config/ez-image.js'),
     path.resolve(__dirname, '../public/js/alloyeditor/src/toolbars/config/ez-image-link.js'),
     path.resolve(__dirname, '../public/js/alloyeditor/src/toolbars/config/ez-custom-tag.js'),
+    path.resolve(__dirname, '../public/js/alloyeditor/src/toolbars/config/ez-inline-custom-tag.js'),
     path.resolve(__dirname, '../public/js/alloyeditor/src/toolbars/config/ez-custom-style.js'),
 ];
 const fieldTypes = [];

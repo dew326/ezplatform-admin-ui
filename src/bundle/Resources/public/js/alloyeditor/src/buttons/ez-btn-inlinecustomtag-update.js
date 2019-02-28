@@ -18,15 +18,17 @@ export default class EzBtnInlineCustomTagUpdate extends EzBtnCustomTagUpdate {
             this.execCommand();
         }
 
-        console.log(selection.getHtml());
-        console.log(nativeEditor.getSelectedHtml(true));
-
         const widget = this.getWidget() || this.widget;
         const configValues = Object.assign({}, this.state.values);
 
         widget.setFocused(true);
-        widget.setName(this.customTagName);
-        widget.setWidgetContent(selection.getHtml());
+
+        if (createNewTag) {
+            widget.setName(this.customTagName);
+            widget.setWidgetContent(selection.getHtml());
+            widget.renderIcon();
+        }
+
         widget.clearConfig();
 
         Object.keys(this.attributes).forEach((key) => {
@@ -34,6 +36,8 @@ export default class EzBtnInlineCustomTagUpdate extends EzBtnCustomTagUpdate {
         });
     }
 }
+
+eZ.addConfig('ezAlloyEditor.ezBtnInlineCustomTagUpdate', EzBtnInlineCustomTagUpdate);
 
 EzBtnInlineCustomTagUpdate.defaultProps = {
     command: 'ezinlinecustomtag',

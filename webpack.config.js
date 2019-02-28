@@ -66,6 +66,7 @@ module.exports = {
         ezEmbedImageConfig: './src/bundle/Resources/public/js/alloyeditor/src/toolbars/config/ez-image.js',
         ezEmbedImageLinkConfig: './src/bundle/Resources/public/js/alloyeditor/src/toolbars/config/ez-image-link.js',
         ezCustomTagConfig: './src/bundle/Resources/public/js/alloyeditor/src/toolbars/config/ez-custom-tag.js',
+        ezInlineCustomTagConfig: './src/bundle/Resources/public/js/alloyeditor/src/toolbars/config/ez-inline-custom-tag.js',
         ezCustomStyleConfig: './src/bundle/Resources/public/js/alloyeditor/src/toolbars/config/ez-custom-style.js',
     },
     output: {

@@ -6,7 +6,7 @@
 
     Object.entries(global.eZ.adminUiConfig.richTextCustomTags).forEach(([customTag, tagConfig]) => {
         const isInline = tagConfig.isInline;
-        const componentClassName = `ezBtn${isInline ? 'Inline' : ''}${customTag.charAt(0).toUpperCase() + customTag.slice(1)}`;
+        const componentClassName = `ezBtn${customTag.charAt(0).toUpperCase() + customTag.slice(1)}`;
         const editComponentClassName = `${componentClassName}Edit`;
         const updateComponentClassName = `${componentClassName}Update`;
         const buttonCustomTagBaseClass = isInline ? global.eZ.ezAlloyEditor.ezBtnInlineCustomTag : global.eZ.ezAlloyEditor.ezBtnCustomTag;
@@ -36,7 +36,7 @@
             }
 
             static get key() {
-                return `${isInline ? 'inline' : ''}${customTag}`;
+                return customTag;
             }
         }
 
@@ -49,7 +49,7 @@
             }
 
             static get key() {
-                return `${isInline ? 'inline' : ''}${customTag}edit`;
+                return `${customTag}edit`;
             }
         }
 
@@ -62,7 +62,7 @@
             }
 
             static get key() {
-                return `${isInline ? 'inline' : ''}${customTag}update`;
+                return `${customTag}update`;
             }
         }
 

@@ -87,7 +87,7 @@ const customTagBaseDefinition = {
      * @method clearNode
      * @param {Element} node
      */
-    clearNode(node) {
+    clearNode: function(node) {
         let element = node.getFirst();
         let next;
 
@@ -403,7 +403,7 @@ const customTagBaseDefinition = {
      * @return {CKEDITOR.dom.element}
      */
     getEzConfigElement: function() {
-        let config = [...this.element.getChildren().$].find((child) => child.dataset.ezelement === 'ezconfig');
+        let config = [...this.element.getChildren().$].find((child) => child.dataset && child.dataset.ezelement === 'ezconfig');
 
         if (!config) {
             config = new CKEDITOR.dom.element('span');
@@ -424,7 +424,7 @@ const customTagBaseDefinition = {
      * @return {CKEDITOR.dom.element}
      */
     getEzContentElement: function() {
-        let content = [...this.element.getChildren().$].find((child) => child.dataset.ezelement === 'ezcontent');
+        let content = [...this.element.getChildren().$].find((child) => child.dataset && child.dataset.ezelement === 'ezcontent');
 
         if (!content) {
             content = new CKEDITOR.dom.element('div');
@@ -445,7 +445,7 @@ const customTagBaseDefinition = {
      * @return {CKEDITOR.dom.element}
      */
     getEzAttributesElement: function() {
-        let attributes = [...this.element.getChildren().$].find((child) => child.dataset.ezelement === 'ezattributes');
+        let attributes = [...this.element.getChildren().$].find((child) => child.dataset && child.dataset.ezelement === 'ezattributes');
 
         if (!attributes) {
             attributes = new CKEDITOR.dom.element('div');
@@ -466,7 +466,7 @@ const customTagBaseDefinition = {
      * @return {CKEDITOR.dom.element}
      */
     getHeader: function() {
-        let header = [...this.element.getChildren().$].find((child) => child.classList.contains('ez-custom-tag__header'));
+        let header = [...this.element.getChildren().$].find((child) => child.dataset && child.classList.contains('ez-custom-tag__header'));
 
         if (!header) {
             header = new CKEDITOR.dom.element('div');
