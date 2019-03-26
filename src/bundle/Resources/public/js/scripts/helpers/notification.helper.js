@@ -28,11 +28,12 @@
      * @param {String} message
      * @param {Function} [onShow] to be called after notification Node was added
      */
-    const showInfoNotification = (message, onShow) =>
+    const showInfoNotification = (message, onShow, rawPlaceholdersMap = {}) =>
         showNotification({
             message,
             label: NOTIFICATION_INFO_LABEL,
             onShow,
+            rawPlaceholdersMap,
         });
 
     /**
