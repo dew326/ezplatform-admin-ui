@@ -126,29 +126,7 @@ class UniversalDiscoveryController extends Controller
 
         $sortClause = $this->getSortClause($sortClauseName, $sortOrder);
 
-        $breadcrumbLocations = $this->getBreadcrumbLocations($location);
-        $breadcrumbLocationsLast = count($breadcrumbLocations) - 1;
-
-        $columnLocations = $breadcrumbLocationsLast < 2
-            ? $breadcrumbLocations
-            : [
-                $breadcrumbLocations[0], // First
-                $breadcrumbLocations[$breadcrumbLocationsLast - 1], // Before last
-                $breadcrumbLocations[$breadcrumbLocationsLast], // Last
-            ];
-
-        foreach ($columnLocations as $columnLocation) {
-            if (!isset($columns[$columnLocation->id])) {
-                $columns[$columnLocation->id] = [
-                    'location' => $this->getRestFormat($columnLocation),
-                    'subitems' => [
-                        'locations' => $this->getSubitemLocations($columnLocation, 0, $limit, $sortClause),
-                    ],
-                ];
-            }
-        }
-
-        $columns[$location->id] = $this->getLocationData($location, 0, $limit, $sortClause);
+        $columns = $this->getColumns($location, $limit, $sortClause);
 
         return new JsonResponse([
             'breadcrumb' => array_map(
@@ -171,6 +149,8 @@ class UniversalDiscoveryController extends Controller
 
         $sortClause = $this->getSortClause($sortClauseName, $sortOrder);
 
+        $columns = $this->getColumns($location, $limit, $sortClause, true);
+
         return new JsonResponse([
             'breadcrumb' => array_map(
                 function (Location $location) {
@@ -178,10 +158,43 @@ class UniversalDiscoveryController extends Controller
                 },
                 $this->getBreadcrumbLocations($location)
             ),
-            'columns' => [
-                $location->id => $this->getLocationGridViewData($location, 0, $limit, $sortClause),
-            ],
+            'columns' => $columns,
         ]);
+    }
+
+    private function getColumns(
+        Location $location,
+        int $limit,
+        Query\SortClause $sortClause,
+        bool $gridView = false
+    ): array {
+        $breadcrumbLocations = $this->getBreadcrumbLocations($location);
+        $breadcrumbLocationsLast = count($breadcrumbLocations) - 1;
+
+        $columnLocations = $breadcrumbLocationsLast < 2
+            ? $breadcrumbLocations
+            : [
+                $breadcrumbLocations[0], // First
+                $breadcrumbLocations[$breadcrumbLocationsLast - 1], // Before last
+                $breadcrumbLocations[$breadcrumbLocationsLast], // Last
+            ];
+
+        foreach ($columnLocations as $columnLocation) {
+            if (!isset($columns[$columnLocation->id])) {
+                $columns[$columnLocation->id] = [
+                    'location' => $this->getRestFormat($columnLocation),
+                    'subitems' => [
+                        'locations' => $this->getSubitemLocations($columnLocation, 0, $limit, $sortClause),
+                    ],
+                ];
+            }
+        }
+
+        $columns[$location->id] = $gridView
+            ? $this->getLocationGridViewData($location, 0, $limit, $sortClause)
+            : $this->getLocationData($location, 0, $limit, $sortClause);
+
+        return $columns;
     }
 
     private function getParentLocationPath(Location $location): array
