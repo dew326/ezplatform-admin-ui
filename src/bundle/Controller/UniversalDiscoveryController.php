@@ -125,6 +125,7 @@ class UniversalDiscoveryController extends Controller
         $sortOrder = $request->query->getAlpha('sortOrder', Query::SORT_ASC);
 
         $sortClause = $this->getSortClause($sortClauseName, $sortOrder);
+        $breadcrumbLocations = $this->getBreadcrumbLocations($location);
 
         $columns = $this->getColumns($location, $limit, $sortClause);
 
