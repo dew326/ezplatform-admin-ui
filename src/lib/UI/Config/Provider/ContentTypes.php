@@ -68,6 +68,7 @@ class ContentTypes implements ProviderInterface
 
             foreach ($contentTypes as $contentType) {
                 $contentTypeGroups[$contentTypeGroup->identifier][] = [
+                    'id' => $contentType->id,
                     'identifier' => $contentType->identifier,
                     'name' => $contentType->getName(),
                     'isContainer' => $contentType->isContainer,
