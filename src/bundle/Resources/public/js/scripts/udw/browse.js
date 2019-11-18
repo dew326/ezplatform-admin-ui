@@ -50,6 +50,38 @@
             onCancel: closeUDW,
             tabs: window.eZ.adminUiConfig.universalDiscoveryWidget.tabs,
             title: 'Browsing content',
+            multiple: true,
+            multipleItemsLimit: 3,
+            activeTab: 'browse',
+            startingLocationId: null,
+            containersOnly: false,
+            allowedContentTypes: null,
+            activeSortClause: 'name',
+            activeSortOrder: 'descending',
+            contentOnTheFly: {
+                allowedLanguages: null,
+                allowedLocations: null,
+                preselectedLanguage: null,
+                preselectedContentType: null,
+                hidden: false,
+            },
+            tabsConfig: {
+                search: {
+                    itemsPerPage: 50,
+                    priority: 30,
+                    hidden: false,
+                },
+                bookmarks: {
+                    itemsPerPage: 50,
+                    priority: 20,
+                    hidden: false,
+                },
+                browse: {
+                    itemsPerPage: 50,
+                    priority: 10,
+                    hidden: false,
+                },
+            },
         };
 
         ReactDOM.render(React.createElement(eZ.modules.UDW, newConfig), udwContainer);
