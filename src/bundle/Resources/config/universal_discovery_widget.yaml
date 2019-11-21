@@ -4,14 +4,14 @@ system:
             configuration:
                 # Default UDW Configuration
                 _default:
-                    multiple: true
+                    multiple: false
                     multiple_items_limit: 0
-                    root_location_id: 1
-                    starting_location_id: 1
+                    root_location_id: 2
+                    starting_location_id: 2
                     containers_only: false
                     allowed_content_types: []
-                    active_sort_clause: ''
-                    active_sort_order: ''
+                    active_sort_clause: 'date'
+                    active_sort_order: 'ascending'
                     active_tab: 'browse'
                     active_view: 'finder'
                     content_on_the_fly:
@@ -20,7 +20,7 @@ system:
                         preselected_language: null
                         preselected_content_type: null
                         hidden: false
-                    tabs:
+                    tabs_config:
                         search:
                             items_per_page: 50
                             priority: 10
