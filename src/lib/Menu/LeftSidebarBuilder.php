@@ -102,20 +102,6 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
                     ],
                 ]
             ),
-            'sidebar_left__browse2' => $this->createMenuItem(
-                'sidebar_left__browse2',
-                [
-                    'extras' => ['icon' => 'browse'],
-                    'attributes' => [
-                        'type' => 'button',
-                        'class' => 'btn--new-udw-browse',
-                        'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single', [
-                            'type' => 'content_create',
-                        ]),
-                        'data-starting-location-id' => $this->configResolver->getConfig('default')['starting_location_id'],
-                    ],
-                ]
-            ),
             self::ITEM__TREE => $this->createMenuItem(
                 self::ITEM__TREE,
                 [
@@ -158,7 +144,6 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
         return [
             (new Message(self::ITEM__SEARCH, 'menu'))->setDesc('Search'),
             (new Message(self::ITEM__BROWSE, 'menu'))->setDesc('Browse'),
-            (new Message(self::sidebar_left__browse2, 'menu'))->setDesc('new browse'),
             (new Message(self::ITEM__TREE, 'menu'))->setDesc('Content Tree'),
             (new Message(self::ITEM__TRASH, 'menu'))->setDesc('Trash'),
             (new Message(self::ITEM__BOOKMARK, 'menu'))->setDesc('Bookmarks'),

@@ -9,8 +9,8 @@ system:
                     root_location_id: 2
                     starting_location_id: 2
                     containers_only: false
-                    allowed_content_types: []
-                    active_sort_clause: 'date'
+                    allowed_content_types: ['article']
+                    active_sort_clause: 'DatePublished'
                     active_sort_order: 'ascending'
                     active_tab: 'browse'
                     active_view: 'finder'

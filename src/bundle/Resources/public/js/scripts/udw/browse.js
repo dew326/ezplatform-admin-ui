@@ -31,31 +31,4 @@
     };
 
     btns.forEach((btn) => btn.addEventListener('click', openUDW, false));
-
-    // Hardcoded
-
-    const newUdwBtn = doc.querySelector('.btn--new-udw-browse');
-    const openNewUDW = (event) => {
-        event.preventDefault();
-
-        const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
-        const onConfirm = (items) => {
-            closeUDW();
-
-            global.location.href = Routing.generate('_ezpublishLocation', { locationId: items[0].id });
-        };
-        const config = JSON.parse(event.currentTarget.dataset.udwConfig);
-
-        const newConfig = {
-            onConfirm,
-            onCancel: closeUDW,
-            tabs: window.eZ.adminUiConfig.universalDiscoveryWidget.tabs,
-            title: 'Browsing content',
-            ...config,
-        };
-
-        ReactDOM.render(React.createElement(eZ.modules.UDW, newConfig), udwContainer);
-    };
-
-    newUdwBtn.addEventListener('click', openNewUDW, false);
 })(window, window.document, window.eZ, window.React, window.ReactDOM, window.Translator, window.Routing);
