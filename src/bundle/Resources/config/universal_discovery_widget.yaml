@@ -6,14 +6,15 @@ system:
                 _default:
                     multiple: false
                     multiple_items_limit: 0
-                    root_location_id: 2
-                    starting_location_id: 2
+                    root_location_id: 1
+                    starting_location_id: 1
                     containers_only: false
                     allowed_content_types: ['article']
                     active_sort_clause: 'DatePublished'
                     active_sort_order: 'ascending'
                     active_tab: 'browse'
                     active_view: 'finder'
+                    allow_content_edit: false
                     content_on_the_fly:
                         allowed_languages: []
                         allowed_locations: []
@@ -41,6 +42,8 @@ system:
                         bookmarks:
                             hidden: true
                     multiple: false
+                browse:
+                    allow_content_edit: true
                 single:
                     multiple: false
                 multiple:
