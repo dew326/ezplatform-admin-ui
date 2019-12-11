@@ -75,16 +75,4 @@ class UniversalDiscoveryExtension extends AbstractExtension
 
         return lcfirst(implode('', $words));
     }
-
-    private function getAllowedContentTypes(array $config): array
-    {
-        // To avoid BC breaks, we're forced to use [null] as empty allowed content types list
-        // It will be handled by frontend component
-        if (count($config) === 1 && $config[0] === null) {
-            return $config;
-        }
-
-        // Remove any false-castable elements (like null)
-        return array_filter($config);
-    }
 }
